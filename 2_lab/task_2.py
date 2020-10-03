@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """ Laboratory work 2. Task 2 """
 
+import numpy as np
 from deque.deque import Deque
 
-d = Deque([3, 5, 7, 6, 4, 9])
+d = Deque(np.array([3, 5, 7, 6, 4, 9]))
 
 print(d.push_front())
 print(d.push_back())

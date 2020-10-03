@@ -1,5 +1,6 @@
  #!/usr/bin/env python3
 """ The class for laboratory work 2 """
+import sys
 import numpy as np
 
 class Deque:
@@ -8,13 +9,15 @@ class Deque:
     """
     def __init__(self, array):
         self.deque = array
-
+        self.check()
+        
     def push_front (self):
         """
             Add new item to beginning of deque
         """
         new_item = int(input("New item to beggining: "))
         self.deque = np.insert(self.deque, 0, new_item)
+        self.check()
         return self.deque
 
     def push_back (self):
@@ -23,6 +26,7 @@ class Deque:
         """
         new_item = int(input("New item to the end: "))
         self.deque = np.append(self.deque, new_item)
+        self.check()
         return self.deque
 
     def pop_front (self):
@@ -72,4 +76,12 @@ class Deque:
         """
         self.deque = np.array([])
         return "Deque is empty!"
+
+
+    def check (self):
+        """
+            Check amount of deque
+        """
+        if self.deque.size > 100:
+            sys.exit("The number of items exceeds 100!")
         
