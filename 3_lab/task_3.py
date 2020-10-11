@@ -49,6 +49,28 @@ class HashTable:
                     # Если такой ключ уже есть, то обновляем данные
                     self.data[new_hash_key] = data
 
+    def get_item (self, key):
+        """ Get item by hash key """
+        initial_slot = self.count_hash(key, len(self.slots))
+
+        # Устанавливаем начальные параметры для поиска
+        data = None
+        stop = False
+        found = False
+        position = initial_slot
+        while self.slots[position] is not None and not found and not stop:
+            if self.slots[position] == key:
+                found = True
+                data = self.data[position]
+            else:
+                position = self.linear_probling(position, len(self.slots))
+                if position == initial_slot:
+                    stop = True
+
+        return data
+
+    def __getitem__(self, key):
+        return self.get_item(key)
 
     def __setitem__(self, key, data):
         """ Special function for [] constraction """
