@@ -66,7 +66,7 @@ class HashTable:
                 position = self.linear_probling(position, len(self.slots))
                 if position == initial_slot:
                     stop = True
-        
+
         return data
 
     def delete_item (self, key):
@@ -89,13 +89,15 @@ class HashTable:
                     self.slots[position] = None
                     self.data[position] = None
 
+        return data
+
     def __getitem__(self, key):
         return self.get_item(key)
 
     def __setitem__(self, key, data):
         """ Special function for [] constraction """
         self.add_item(key, data)
-    
+
     def __delitem__(self, key):
         return self.delete_item(key)
 
