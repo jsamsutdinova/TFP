@@ -44,8 +44,6 @@ class HashTable:
                 found = True
                 data = self.data[position]
             else:
-                print(key)
-                print(self.slots[position])
                 stop = True
 
         return data  
