@@ -111,8 +111,6 @@ if __name__ == '__main__':
     hash_table[54] = "War and Peace"
     hash_table[33] = "Anna Karenina"
     hash_table[12] = "The Brothers Karamazov"
-    print(hash_table.slots)
-    print(hash_table.data)
     print(hash_table[32])
     del hash_table[54]
     print(hash_table.slots)
