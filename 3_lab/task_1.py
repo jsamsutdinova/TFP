@@ -13,11 +13,11 @@ class HashTable:
         self.data = [None] * self.size
 
     @classmethod
-    def count_hash (cls, key, size):
+    def count_hash(cls, key, size):
         """ Get hash key using remainder of a division """
         return key%size
-    
-    def add_item (self, key, data):
+
+    def add_item(self, key, data):
         """ Find empty slot and add new element to this slot"""
         hash_key = self.count_hash(key, len(self.slots))
 
@@ -37,35 +37,36 @@ class HashTable:
                 list_data.append(data)
                 self.slots[hash_key] = tuple(list_slot)
                 self.data[hash_key] = tuple(list_data)
-                
-    
-    def get_item (self, key):
+
+    def get_item(self, key):
         """ Get item by key """
         search_slot = self.count_hash(key, len(self.slots))
 
         if self.slots[search_slot] == key:
-            data = self.data[search_slot] 
+            data = self.data[search_slot]
         elif isinstance(self.slots[search_slot], tuple):
             index_tuple = (self.slots[search_slot].index(key))
             data = (self.data[search_slot][index_tuple])
         else:
             data = None
 
-        return data  
+        return data
 
     def delete_item(self, key):
         """ Delete item by key"""
         deleted_slot = self.count_hash(key, len(self.slots))
-        print('tut')
+
         if self.slots[deleted_slot] == key:
-            print('here')
             self.slots[deleted_slot] = None
-            self.data[deleted_slot] = None 
+            self.data[deleted_slot] = None
         elif isinstance(self.slots[deleted_slot], tuple):
-            
             index_tuple = (self.slots[deleted_slot].index(key))
-            self.slots[deleted_slot][index_tuple] = None
-            self.data[deleted_slot][index_tuple] = None
+            list_slot = list(self.slots[deleted_slot])
+            list_data = list(self.data[deleted_slot])
+            list_slot.pop(index_tuple)
+            list_data.pop(index_tuple)
+            self.slots[deleted_slot] = tuple(list_slot)
+            self.data[deleted_slot] = tuple(list_data)
 
     def __setitem__(self, key, data):
         self.add_item(key, data)
@@ -89,6 +90,6 @@ if __name__ == '__main__':
     print(hash_table[11])
     print(hash_table.slots)
     print(hash_table.data)
-    del hash_table[54]
+    del hash_table[60]
     print(hash_table.slots)
     print(hash_table.data)
