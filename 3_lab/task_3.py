@@ -73,7 +73,6 @@ class HashTable:
         """ Delete item by key """
         initial_slot = self.count_hash(key, len(self.slots))
 
-        data = None
         stop = False
         found = False
         position = initial_slot
@@ -88,8 +87,6 @@ class HashTable:
                     stop = True
                     self.slots[position] = None
                     self.data[position] = None
-
-        return data
 
     def __getitem__(self, key):
         return self.get_item(key)
@@ -111,6 +108,7 @@ if __name__ == '__main__':
     hash_table[54] = "War and Peace"
     hash_table[33] = "Anna Karenina"
     hash_table[12] = "The Brothers Karamazov"
+    print(hash_table.data)
     print(hash_table[32])
     del hash_table[54]
     print(hash_table.slots)
