@@ -27,24 +27,30 @@ class HashTable:
         else:
             if self.slots[hash_key] == key:
                 self.data[hash_key] = data
-            else:
+            elif isinstance(self.slots[hash_key], int):
+                print(self.slots[hash_key])
                 self.slots[hash_key] = (self.slots[hash_key], key,)
                 self.data[hash_key] = (self.data[hash_key], data,)
+            elif len(self.slots[hash_key]) > 1:
+                list_slot = list(self.slots[hash_key])
+                list_data = list(self.data[hash_key])
+                list_slot.append(key)
+                list_data.append(data)
+                self.slots[hash_key] = tuple(list_slot)
+                self.data[hash_key] = tuple(list_data)
+                
     
     def get_item (self, key):
         """ Get item by key """
-        initial_slot = self.count_hash(key, len(self.slots))
+        search_slot = self.count_hash(key, len(self.slots))
 
-        data = None
-        stop = False
-        found = False
-        position = initial_slot
-        while self.slots[position] is not None and not found and not stop:
-            if self.slots[position] == key:
-                found = True
-                data = self.data[position]
-            else:
-                stop = True
+        if self.slots[search_slot] == key:
+            data = self.data[search_slot] 
+        elif isinstance(self.slots[search_slot], tuple):
+            index_tuple = (self.slots[search_slot].index(key))
+            data = (self.data[search_slot][index_tuple])
+        else:
+            data = None
 
         return data  
 
@@ -56,9 +62,16 @@ class HashTable:
 
 if __name__ == '__main__':
     hash_table = HashTable()
-    hash_table[20] = 'cat'
-    hash_table[24] = 'dog'
-    hash_table[32] = 'lion'
+    # hash_table[20] = 'cat'
+    # hash_table[24] = 'dog'
+    # hash_table[32] = 'lion'
+    hash_table[20] = "A hero of our Time"
+    hash_table[45] = "Dead Souls"
+    hash_table[32] = "Oblomov"
+    hash_table[60] = "Fathers and Sons"
+    hash_table[21] = "Crime and Punshment"
+    hash_table[54] = "War and Peace"
+    hash_table[33] = "Anna Karenina"
+    hash_table[12] = "The Brothers Karamazov"
     print(hash_table.slots)
     print(hash_table.data)
-    print(hash_table[32])
