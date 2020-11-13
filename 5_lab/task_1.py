@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-""" Laboratory work 5. Task 1 """
+""" Code to insert a node in binary search tree """
 
 
 class Node:
     """
-        This class imlements insert operation in binary search tree (BST).
         Represents an individual node in a BST
     """
     def __init__(self, key):
@@ -31,10 +30,10 @@ def insert(root, key):
 
 def preorder(root):
     """
-        This function to to do preorder tree traversal
+        This function do preorder tree traversal
     """
     if root:
-        print(root.item)
+        print("{0} ".format(root.item), end="")
         preorder(root.left)
         preorder(root.right)
 
@@ -48,9 +47,3 @@ bst = insert(bst, 40)
 bst = insert(bst, 70)
 
 preorder(bst)
-
-print('left')
-preorder(bst.left)
-
-print('right')
-preorder(bst.right)
