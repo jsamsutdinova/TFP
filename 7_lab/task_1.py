@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+""" Laboratory work 7. Task 1 """
+
 import os
 import copy
 from shutil import copyfile
